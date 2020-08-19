@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer
-      v-model="drawer"
+      v-model="sideDrawer"
       app
       clipped
     >
@@ -25,36 +25,30 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar
-      app
-      clipped-left
-      color="indigo"
-      dark
-    >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
-    </v-app-bar>
+    <Toolbar/>
 
     <v-main>
       <router-view/>
     </v-main>
-    <v-footer
-      color="indigo"
-      app
-    >
-      <span class="white--text">&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
+    <Footer/>
   </v-app>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import Toolbar from './components/Toolbar'
+import Footer from './components/Footer'
+
 export default {
   props: {
     source: String
   },
-
-  data: () => ({
-    drawer: null
-  })
+  components: {
+    Footer,
+    Toolbar
+  },
+  computed: mapState([
+    'sideDrawer'
+  ])
 }
 </script>
