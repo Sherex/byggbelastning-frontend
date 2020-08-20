@@ -1,7 +1,7 @@
 <template>
-  <v-container fill-height fluid align-start justify-center>
-    <v-row>
-      <v-col cols="4" v-for="school in schools" :key="school.name">
+  <v-container fill-height fluid>
+    <v-row class="align-start justify-center">
+      <v-col cols="auto" style="min-width: 375px;" v-for="school in schools" :key="school.name">
         <SchoolInfo :school="school"/>
       </v-col>
     </v-row>
@@ -54,6 +54,15 @@ export default Vue.extend({
         },
         {
           name: 'Porsgrunn',
+          clients: {
+            current: 1405,
+            uniqueToday: 1832,
+            uniqueYesterday: 1738,
+            trend: [0]
+          }
+        },
+        {
+          name: 'Hjalmar Johansen',
           clients: {
             current: 1405,
             uniqueToday: 1832,
