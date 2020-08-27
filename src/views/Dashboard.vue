@@ -11,71 +11,25 @@
 <script lang="ts">
 import Vue from 'vue'
 import SchoolInfo from '../components/SchoolInfo.vue'
+import { getDashboardData, DashboardData } from '../lib/get-dashboard-data'
 
 export default Vue.extend({
-  name: 'Home',
+  name: 'Dashboard',
   components: {
     SchoolInfo
   },
   created: function () {
-    this.schools.forEach(school => {
-      school.clients.trend = this.genTrend(1300, 2000)
-    })
+    this.updateData()
   },
   data: function () {
+    const schools: DashboardData[] | undefined[] = []
     return {
-      schools: [
-        {
-          name: 'Skogmo',
-          clients: {
-            current: 1066,
-            uniqueToday: 1746,
-            uniqueYesterday: 1533,
-            trend: [0]
-          }
-        },
-        {
-          name: 'Bamble',
-          clients: {
-            current: 952,
-            uniqueToday: 1430,
-            uniqueYesterday: 1527,
-            trend: [0]
-          }
-        },
-        {
-          name: 'Skien',
-          clients: {
-            current: 1589,
-            uniqueToday: 2203,
-            uniqueYesterday: 2120,
-            trend: [0]
-          }
-        },
-        {
-          name: 'Porsgrunn',
-          clients: {
-            current: 1405,
-            uniqueToday: 1832,
-            uniqueYesterday: 1738,
-            trend: [0]
-          }
-        },
-        {
-          name: 'Hjalmar Johansen',
-          clients: {
-            current: 1405,
-            uniqueToday: 1832,
-            uniqueYesterday: 1738,
-            trend: [0]
-          }
-        }
-      ]
+      schools
     }
   },
   methods: {
-    genTrend: (min: number, max: number): number[] => {
-      return Array.from({ length: 12 }, () => Math.ceil(Math.random() * (max - min) + min))
+    updateData: async function () {
+      this.schools = await getDashboardData()
     }
   }
 })

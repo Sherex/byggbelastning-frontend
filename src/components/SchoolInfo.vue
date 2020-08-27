@@ -24,19 +24,19 @@
           </v-col>
         </v-row>
       </v-container>
-      <v-sparkline
-        :key="school.name"
-        :smooth="16"
-        color="primary"
-        :line-width="3"
-        :value="school.clients.trend"
-        auto-draw
-        stroke-linecap="round"
-        fill
-        label-size="12"
-        padding="12"
-        :labels="['-12h', ...Array.from({ length: 10 }, () => ' '), '0h']"
-      ></v-sparkline>
+      <div style="text-align: center;">
+        <v-sparkline
+          :key="school.name"
+          :smooth="16"
+          color="primary"
+          :line-width="3"
+          :value="school.clients.trend"
+          auto-draw
+          stroke-linecap="round"
+          fill
+        ></v-sparkline>
+        <p>Last 24h</p>
+      </div>
     </v-card-text>
   </v-card>
 </template>
