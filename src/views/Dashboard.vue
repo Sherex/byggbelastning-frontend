@@ -12,6 +12,7 @@
 import Vue from 'vue'
 import SchoolInfo from '../components/SchoolInfo.vue'
 import { getDashboardData, DashboardData } from '../lib/get-dashboard-data'
+import { getLocations, Location } from '../lib/get-locations'
 
 export default Vue.extend({
   name: 'Dashboard',
@@ -19,16 +20,21 @@ export default Vue.extend({
     SchoolInfo
   },
   created: function () {
-    this.updateData()
+    this.updateLocations()
+    // this.updateData()
   },
   data: function () {
-    const schools: DashboardData[] | undefined[] = []
+    const schools: DashboardData[] | Location[] | undefined[] = []
     return {
       schools
     }
   },
   methods: {
+    updateLocations: async function () {
+      this.schools = await getLocations()
+    },
     updateData: async function () {
+      // TODO: Handle if data fetch failed, display error
       this.schools = await getDashboardData()
     }
   }
