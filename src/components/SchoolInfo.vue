@@ -1,7 +1,10 @@
 <template>
   <v-card>
     <v-card-title>{{school.name}}</v-card-title>
-    <v-card-text>
+    <v-card-subtitle>
+      Buildings: {{school.buildings.length}} - Floors: {{school.buildings.reduce((p, b) => p + b.floors.length, 0)}}
+    </v-card-subtitle>
+    <v-card-text v-if="school.clients">
       <v-container fluid style="text-align: center;">
         <v-row>
           <v-col cols="4">
@@ -37,6 +40,12 @@
         ></v-sparkline>
         <p>Last 24h</p>
       </div>
+    </v-card-text>
+    <v-card-text v-else>
+      <v-skeleton-loader
+        class="mx-auto"
+        type="card"
+      ></v-skeleton-loader>
     </v-card-text>
   </v-card>
 </template>
