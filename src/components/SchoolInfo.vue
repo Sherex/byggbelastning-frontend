@@ -45,6 +45,7 @@
       <v-skeleton-loader
         class="mx-auto"
         type="card"
+        boilerplate
       ></v-skeleton-loader>
     </v-card-text>
   </v-card>
