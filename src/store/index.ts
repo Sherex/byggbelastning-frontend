@@ -17,7 +17,7 @@ export default new Vuex.Store<States>({
     filterTypes: []
   },
   mutations: {
-    toggleSideDrawer: (state) => {
+    TOGGLE_SIDE_DRAWER: (state) => {
       state.sideDrawer = !state.sideDrawer
     },
     UPDATE_LOCATIONS: (state, locations: Location[]) => {

@@ -41,7 +41,9 @@ export default Vue.extend({
     TypeFilterButton
   },
   methods: {
-    ...mapMutations(['toggleSideDrawer'])
+    ...mapMutations({
+      toggleSideDrawer: 'TOGGLE_SIDE_DRAWER'
+    })
   }
 })
 </script>
