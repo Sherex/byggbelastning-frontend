@@ -1,6 +1,6 @@
 import { request, gql } from 'graphql-request'
 
-export async function getDashboardData() {
+export async function getDashboardData () {
   // TODO: Get Url from config
   const response = await request<LocationsResponse>('http://localhost:4000/graphql',
     gql`
@@ -35,22 +35,22 @@ export async function getDashboardData() {
 
 interface LocationsResponse {
   locations: Array<{
-    name: string;
+    name: string
     clientCount: {
       timespan: Array<{
-        time: string;
-        count: number;
-      }>;
-    };
-  }>;
+        time: string
+        count: number
+      }>
+    }
+  }>
 }
 
 export interface DashboardData {
-  name: string;
+  name: string
   clients: {
-    current: number;
-    uniqueToday: number;
-    uniqueYesterday: number;
-    trend: number[];
-  };
+    current: number
+    uniqueToday: number
+    uniqueYesterday: number
+    trend: number[]
+  }
 }

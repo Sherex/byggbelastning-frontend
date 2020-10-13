@@ -9,12 +9,13 @@
   </v-footer>
 </template>
 
-<script>
+<script lang='ts'>
+import Vue from 'vue'
 
-export default {
+export default Vue.extend({
   name: 'Footer',
   data: () => ({
     productOwner: 'Vestfold og Telemark Fylkeskommune'
   })
-}
+})
 </script>

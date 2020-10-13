@@ -42,12 +42,13 @@
   </v-app>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
 import { mapState } from 'vuex'
-import Toolbar from './components/Toolbar'
-import Footer from './components/Footer'
+import Toolbar from './components/Toolbar.vue'
+import Footer from './components/Footer.vue'
 
-export default {
+export default Vue.extend({
   props: {
     source: String
   },
@@ -58,5 +59,5 @@ export default {
   computed: mapState([
     'sideDrawer'
   ])
-}
+})
 </script>

@@ -5,9 +5,9 @@ import { Location } from '../lib/get-locations'
 Vue.use(Vuex)
 
 interface States {
-  sideDrawer: boolean;
-  locations: Location[] | [];
-  filterTypes: string[] | [];
+  sideDrawer: boolean
+  locations: Location[] | []
+  filterTypes: string[] | []
 }
 
 export default new Vuex.Store<States>({

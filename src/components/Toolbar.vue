@@ -30,11 +30,12 @@
   </v-app-bar>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
 import { mapMutations } from 'vuex'
-import TypeFilterButton from './TypeFilterButton'
+import TypeFilterButton from './TypeFilterButton.vue'
 
-export default {
+export default Vue.extend({
   name: 'Toolbar',
   components: {
     TypeFilterButton
@@ -42,7 +43,7 @@ export default {
   methods: {
     ...mapMutations(['toggleSideDrawer'])
   }
-}
+})
 </script>
 
 <style scoped>
