@@ -2,7 +2,7 @@
   <v-container fill-height fluid>
     <v-row class="align-start justify-center">
       <v-col cols="auto" style="min-width: 375px;" v-for="location in locations" :key="location.name">
-        <SchoolInfo :location="location"/>
+        <LocationInfo :location="location"/>
       </v-col>
     </v-row>
   </v-container>
@@ -10,14 +10,14 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import SchoolInfo from '../components/SchoolInfo.vue'
+import LocationInfo from '../components/LocationInfo.vue'
 // import { getDashboardData, DashboardData } from '../lib/get-dashboard-data'
 import { getLocations, Location } from '../lib/get-locations'
 
 export default Vue.extend({
   name: 'Dashboard',
   components: {
-    SchoolInfo
+    LocationInfo
   },
   created: async function () {
     const locations = await getLocations()

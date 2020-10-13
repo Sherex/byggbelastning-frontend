@@ -54,7 +54,7 @@
 
 <script>
 export default {
-  name: 'SchoolInfo',
+  name: 'LocationInfo',
   props: [
     'location'
   ]
