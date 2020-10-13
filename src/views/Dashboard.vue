@@ -1,8 +1,8 @@
 <template>
   <v-container fill-height fluid>
     <v-row class="align-start justify-center">
-      <v-col cols="auto" style="min-width: 375px;" v-for="school in locations" :key="school.name">
-        <SchoolInfo :school="school"/>
+      <v-col cols="auto" style="min-width: 375px;" v-for="location in locations" :key="location.name">
+        <SchoolInfo :location="location"/>
       </v-col>
     </v-row>
   </v-container>

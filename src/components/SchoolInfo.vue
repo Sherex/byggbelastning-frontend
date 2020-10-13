@@ -1,28 +1,28 @@
 <template>
   <v-card>
-    <v-card-title>{{school.name}}</v-card-title>
+    <v-card-title>{{location.name}}</v-card-title>
     <v-card-subtitle>
-      <b>{{school.type.name || school.type.code}}</b><br>
-      Buildings: {{school.buildings.length}} - Floors: {{school.buildings.reduce((p, b) => p + b.floors.length, 0)}}
+      <b>{{location.type.name || location.type.code}}</b><br>
+      Buildings: {{location.buildings.length}} - Floors: {{location.buildings.reduce((p, b) => p + b.floors.length, 0)}}
     </v-card-subtitle>
-    <v-card-text v-if="school.clients">
+    <v-card-text v-if="location.clients">
       <v-container fluid style="text-align: center;">
         <v-row>
           <v-col cols="4">
             <div>
-              <h1>{{school.clients.current}}</h1>
+              <h1>{{location.clients.current}}</h1>
               <p>Currently</p>
             </div>
           </v-col>
           <v-col cols="4">
             <div>
-              <h1>{{school.clients.uniqueToday}}</h1>
+              <h1>{{location.clients.uniqueToday}}</h1>
               <p>Today</p>
             </div>
           </v-col>
           <v-col cols="4">
             <div>
-              <h1>{{school.clients.uniqueYesterday}}</h1>
+              <h1>{{location.clients.uniqueYesterday}}</h1>
               <p>Yesterday</p>
             </div>
           </v-col>
@@ -30,11 +30,11 @@
       </v-container>
       <div style="text-align: center;">
         <v-sparkline
-          :key="school.name"
+          :key="location.name"
           :smooth="16"
           color="primary"
           :line-width="3"
-          :value="school.clients.trend"
+          :value="location.clients.trend"
           auto-draw
           stroke-linecap="round"
           fill
@@ -56,7 +56,7 @@
 export default {
   name: 'SchoolInfo',
   props: [
-    'school'
+    'location'
   ]
 }
 </script>
