@@ -22,6 +22,9 @@
       label="Search"
       prepend-inner-icon="mdi-magnify"
     ></v-text-field>
+
+    <type-filter-button/>
+
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
   </v-app-bar>
@@ -29,9 +32,13 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import TypeFilterButton from './TypeFilterButton'
 
 export default {
   name: 'Toolbar',
+  components: {
+    TypeFilterButton
+  },
   methods: {
     ...mapMutations(['toggleSideDrawer'])
   }

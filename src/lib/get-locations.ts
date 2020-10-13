@@ -7,6 +7,10 @@ export async function getLocations (): Promise<Location[]> {
       query getLocations {
         locations {
           name
+          type {
+            code
+            name
+          }
           buildings {
             name
             floors {
@@ -17,13 +21,16 @@ export async function getLocations (): Promise<Location[]> {
       }
     `
   )
-  console.log(response.locations[0].buildings.reduce((p, b) => p + b.floors.length, 0))
   return response.locations
 }
 
 interface LocationsResponse {
   locations: Array<{
     name: string;
+    type: {
+      code: string;
+      name: string;
+    };
     buildings: Array<{
       name: string;
       floors: Array<{
@@ -35,6 +42,10 @@ interface LocationsResponse {
 
 export interface Location {
   name: string;
+  type: {
+    code: string;
+    name: string;
+  };
   buildings: Array<{
     name: string;
     floors: Array<{

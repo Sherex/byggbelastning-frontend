@@ -2,6 +2,7 @@
   <v-card>
     <v-card-title>{{school.name}}</v-card-title>
     <v-card-subtitle>
+      <b>{{school.type.name || school.type.code}}</b><br>
       Buildings: {{school.buildings.length}} - Floors: {{school.buildings.reduce((p, b) => p + b.floors.length, 0)}}
     </v-card-subtitle>
     <v-card-text v-if="school.clients">

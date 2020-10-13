@@ -1,7 +1,7 @@
 <template>
   <v-container fill-height fluid>
     <v-row class="align-start justify-center">
-      <v-col cols="auto" style="min-width: 375px;" v-for="school in schools" :key="school.name">
+      <v-col cols="auto" style="min-width: 375px;" v-for="school in locations" :key="school.name">
         <SchoolInfo :school="school"/>
       </v-col>
     </v-row>
@@ -11,7 +11,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import SchoolInfo from '../components/SchoolInfo.vue'
-import { getDashboardData, DashboardData } from '../lib/get-dashboard-data'
+// import { getDashboardData, DashboardData } from '../lib/get-dashboard-data'
 import { getLocations, Location } from '../lib/get-locations'
 
 export default Vue.extend({
@@ -19,23 +19,15 @@ export default Vue.extend({
   components: {
     SchoolInfo
   },
-  created: function () {
-    this.updateLocations()
-    // this.updateData()
+  created: async function () {
+    const locations = await getLocations()
+    this.$store.commit('UPDATE_LOCATIONS', locations)
   },
-  data: function () {
-    const schools: DashboardData[] | Location[] | undefined[] = []
-    return {
-      schools
-    }
-  },
-  methods: {
-    updateLocations: async function () {
-      this.schools = await getLocations()
-    },
-    updateData: async function () {
-      // TODO: Handle if data fetch failed, display error
-      this.schools = await getDashboardData()
+  computed: {
+    locations: function () {
+      const filterTypes = this.$store.state.filterTypes
+      const locations: Location[] = this.$store.state.locations
+      return locations.filter(location => filterTypes.includes(location.type.code))
     }
   }
 })
