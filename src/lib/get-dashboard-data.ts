@@ -1,43 +1,10 @@
 import { request, gql } from 'graphql-request'
 
-export async function getDashboardData () {
-  // TODO: Get Url from config
-  const response = await request<LocationsResponse>('http://localhost:4000/graphql',
-    gql`
-      query getLocations($timeFrom: String) {
-        locations {
-          name
-          clientCount {
-            timespan (from: $timeFrom) {
-              time,
-              count
-            }
-          }
-        }
-      }
-    `,
-    {
-      timeFrom: new Date(Date.now() - (24 * 1000 * 60 * 60)).toISOString().split('T')[0]
-    }
-  )
-  const dashboardData: DashboardData[] = response.locations.map(loc => ({
-    name: loc.name,
-    clients: {
-      current: 0,
-      uniqueToday: 0,
-      uniqueYesterday: Math.max(...loc.clientCount.timespan.map(ts => ts.count)),
-      trend: loc.clientCount.timespan.map(ts => ts.count)
-    }
-  }))
-
-  return dashboardData
-}
-
 interface LocationsResponse {
   locations: Array<{
-    name: string
+    id: number
     clientCount: {
-      timespan: Array<{
+      last24h: Array<{
         time: string
         count: number
       }>
@@ -46,11 +13,46 @@ interface LocationsResponse {
 }
 
 export interface DashboardData {
-  name: string
+  id: number
   clients: {
     current: number
     uniqueToday: number
     uniqueYesterday: number
     trend: number[]
   }
+}
+
+export async function getDashboardData (): Promise<DashboardData[]> {
+  // TODO: Get Url from config
+  const response = await request<LocationsResponse>('http://localhost:4000/graphql',
+    // TODO: Remove id limit
+    gql`
+      query getLocations {
+        locations (id: [10, 26, 52]) {
+          id
+          clientCount {
+            last24h {
+              time,
+              count
+            }
+          }
+        }
+      }
+    `,
+    {
+      // timeFrom: new Date(Date.now() - (24 * 1000 * 60 * 60)).toISOString().split('T')[0]
+    }
+  )
+  const dashboardData: DashboardData[] = response.locations
+    .filter(loc => loc.clientCount.last24h.length > 0)
+    .map(loc => ({
+      id: loc.id,
+      clients: {
+        current: 0,
+        uniqueToday: 0,
+        uniqueYesterday: Math.max(...loc.clientCount.last24h.map(hour => hour.count)), // TODO: Not unique! Needs it's own query
+        trend: loc.clientCount.last24h.map(hour => hour.count)
+      }
+    }))
+  return dashboardData
 }

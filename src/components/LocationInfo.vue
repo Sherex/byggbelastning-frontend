@@ -43,10 +43,12 @@
       </div>
     </v-card-text>
     <v-card-text v-else>
+      <!-- TODO: Find better solution for card size when no data -->
       <v-skeleton-loader
         class="mx-auto"
         type="card"
         boilerplate
+        max-height="226px"
       ></v-skeleton-loader>
     </v-card-text>
   </v-card>

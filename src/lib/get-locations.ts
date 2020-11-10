@@ -2,12 +2,14 @@ import { request, gql } from 'graphql-request'
 
 interface LocationsResponse {
   locations: Array<{
+    id: number
     name: string
     type: {
       code: string
       name: string
     }
     buildings: Array<{
+      id: number
       name: string
       floors: Array<{
         name: string
@@ -17,12 +19,20 @@ interface LocationsResponse {
 }
 
 export interface Location {
+  id: number
   name: string
   type: {
     code: string
     name: string
   }
+  clients?: {
+    current: number
+    uniqueToday: number
+    uniqueYesterday: number
+    trend: number[]
+  }
   buildings: Array<{
+    id: number
     name: string
     floors: Array<{
       name: string
@@ -36,12 +46,14 @@ export async function getLocations (): Promise<Location[]> {
     gql`
       query getLocations {
         locations {
+          id
           name
           type {
             code
             name
           }
           buildings {
+            id
             name
             floors {
               name
