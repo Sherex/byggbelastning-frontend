@@ -16,6 +16,7 @@
 
     <v-spacer></v-spacer>
     <v-text-field
+      v-model="searchFieldContent"
       solo-inverted
       flat
       hide-details
@@ -34,6 +35,7 @@
 import Vue from 'vue'
 import { mapMutations } from 'vuex'
 import TypeFilterButton from './TypeFilterButton.vue'
+import store from '../store'
 
 export default Vue.extend({
   name: 'Toolbar',
@@ -44,6 +46,16 @@ export default Vue.extend({
     ...mapMutations({
       toggleSideDrawer: 'TOGGLE_SIDE_DRAWER'
     })
+  },
+  computed: {
+    searchFieldContent: {
+      set (searchText: string): void {
+        store.commit('UPDATE_SEARCH_TEXT', searchText)
+      },
+      get (): string {
+        return store.state.searchText
+      }
+    }
   }
 })
 </script>

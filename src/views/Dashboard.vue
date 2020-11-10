@@ -10,9 +10,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import store from '../store'
 import LocationInfo from '../components/LocationInfo.vue'
 import { getDashboardData } from '../lib/get-dashboard-data'
-import { getLocations, Location } from '../lib/get-locations'
+import { getLocations } from '../lib/get-locations'
 
 export default Vue.extend({
   name: 'Dashboard',
@@ -28,8 +29,12 @@ export default Vue.extend({
   computed: {
     locations: function () {
       const filterTypes = this.$store.state.filterTypes
-      const locations: Location[] = this.$store.state.locations
-      return locations.filter(location => filterTypes.includes(location.type.code))
+      const locations = store.state.locations
+      const searchText = store.state.searchText
+      const locationsFiltered = locations
+        .filter(location => filterTypes.includes(location.type.code))
+        .filter(location => (new RegExp(searchText.replaceAll(' ', '.+'), 'i')).test(location.name))
+      return locationsFiltered
     }
   }
 })

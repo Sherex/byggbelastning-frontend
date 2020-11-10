@@ -9,13 +9,15 @@ interface States {
   sideDrawer: boolean
   locations: Location[] | []
   filterTypes: string[] | []
+  searchText: string
 }
 
 export default new Vuex.Store<States>({
   state: {
     sideDrawer: true,
     locations: [],
-    filterTypes: []
+    filterTypes: [],
+    searchText: ''
   },
   mutations: {
     TOGGLE_SIDE_DRAWER: (state) => {
@@ -33,6 +35,9 @@ export default new Vuex.Store<States>({
     },
     UPDATE_FILTER_TYPES: (state, types: string[] | []) => {
       state.filterTypes = types
+    },
+    UPDATE_SEARCH_TEXT: (state, text: string) => {
+      state.searchText = text
     }
   },
   actions: {
