@@ -4,7 +4,7 @@ interface LocationsResponse {
   locations: Array<{
     id: number
     clientCount: {
-      last24h: Array<{
+      timespan: Array<{
         time: string
         count: number
       }>
@@ -31,7 +31,7 @@ export async function getDashboardData (): Promise<DashboardData[]> {
         locations (id: [10, 26, 52]) {
           id
           clientCount {
-            last24h {
+            timespan {
               time,
               count
             }
@@ -44,14 +44,14 @@ export async function getDashboardData (): Promise<DashboardData[]> {
     }
   )
   const dashboardData: DashboardData[] = response.locations
-    .filter(loc => loc.clientCount.last24h.length > 0)
+    .filter(loc => loc.clientCount.timespan.length > 0)
     .map(loc => ({
       id: loc.id,
       clients: {
         current: 0,
         uniqueToday: 0,
-        uniqueYesterday: Math.max(...loc.clientCount.last24h.map(hour => hour.count)), // TODO: Not unique! Needs it's own query
-        trend: loc.clientCount.last24h.map(hour => hour.count)
+        uniqueYesterday: Math.max(...loc.clientCount.timespan.map(hour => hour.count)), // TODO: Not unique! Needs it's own query
+        trend: loc.clientCount.timespan.map(hour => hour.count)
       }
     }))
   return dashboardData
