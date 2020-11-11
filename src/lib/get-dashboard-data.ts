@@ -28,7 +28,7 @@ export async function getDashboardData (): Promise<DashboardData[]> {
     // TODO: Remove id limit
     gql`
       query getLocations {
-        locations (id: [10, 26, 52]) {
+        locations {
           id
           clientCount {
             timespan {
@@ -51,7 +51,7 @@ export async function getDashboardData (): Promise<DashboardData[]> {
         current: 0,
         uniqueToday: 0,
         uniqueYesterday: Math.max(...loc.clientCount.timespan.map(hour => hour.count)), // TODO: Not unique! Needs it's own query
-        trend: loc.clientCount.timespan.map(hour => hour.count)
+        trend: loc.clientCount.timespan.map(hour => hour.count ?? 0)
       }
     }))
   return dashboardData
