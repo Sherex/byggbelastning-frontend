@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+  byggbelastning-frontend:
+    container_name: byggbelastning-frontend
+    build: ./
+    image: byggbelastning-frontend:latest
+    env_file: ./.env
+    ports:
+      - 80:80
