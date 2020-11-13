@@ -1,11 +1,14 @@
 {
-  "name": "school-client-traffic-frontend",
+  "name": "byggbelastning-frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "echo \"Nothing to start :)\nUse a web server to serve the contents of './dist/'.\nFor ex. Ngnix or Apache.\nOR use 'npm run docker:start'\"",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "docker:start": "docker-compose up -d",
+    "docker:stop": "docker-compose down"
   },
   "dependencies": {
     "@mdi/font": "^5.8.55",
