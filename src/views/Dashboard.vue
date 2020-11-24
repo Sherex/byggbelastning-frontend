@@ -12,8 +12,6 @@
 import Vue from 'vue'
 import store from '../store'
 import LocationInfo from '../components/LocationInfo.vue'
-import { getDashboardData } from '../lib/get-dashboard-data'
-import { getLocations } from '../lib/get-locations'
 
 export default Vue.extend({
   name: 'Dashboard',
@@ -21,11 +19,8 @@ export default Vue.extend({
     LocationInfo
   },
   created: async function () {
-    const locations = await getLocations()
-    this.$store.commit('UPDATE_LOCATIONS', locations)
-    await new Promise((resolve) => setTimeout(() => resolve(), 5000))
-    const locationData = await getDashboardData()
-    this.$store.commit('UPDATE_DASHBOARD_DATA', locationData)
+    await store.dispatch('UPDATE_LOCATIONS')
+    await store.dispatch('UPDATE_DASHBOARD_DATA')
   },
   computed: {
     locations: function () {
