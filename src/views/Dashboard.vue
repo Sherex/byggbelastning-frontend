@@ -18,10 +18,6 @@ export default Vue.extend({
   components: {
     LocationInfo
   },
-  created: async function () {
-    await store.dispatch('UPDATE_LOCATIONS')
-    await store.dispatch('UPDATE_DASHBOARD_DATA')
-  },
   computed: {
     locations: function () {
       const filterTypes = store.getters.enabledFilterTypes
