@@ -1,7 +1,7 @@
 <template>
   <v-container fill-height fluid>
     <v-row class="align-start justify-center">
-      <v-col cols="auto" style="min-width: 375px; max-width: 375px;" v-for="location in locations" :key="location.name">
+      <v-col cols="auto" style="min-width: 375px; max-width: 375px;" v-for="location in locations" :key="location.id">
         <LocationInfo :location="location"/>
       </v-col>
     </v-row>
