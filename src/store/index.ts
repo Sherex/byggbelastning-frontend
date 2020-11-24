@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { Location } from '../lib/get-locations'
-import { DashboardData } from '../lib/get-dashboard-data'
+import { getLocations, Location } from '../lib/get-locations'
+import { getDashboardData, DashboardData } from '../lib/get-dashboard-data'
 
 Vue.use(Vuex)
 
 interface States {
   sideDrawer: boolean
-  locations: Location[] | []
-  filterTypes: string[] | []
+  locations: Location[]
+  filterTypes: string[]
   searchText: string
 }
 
@@ -30,7 +30,7 @@ export default new Vuex.Store<States>({
       data.forEach(location => {
         const foundLocation = state.locations.find(loc => loc.id === location.id)
         if (typeof foundLocation === 'undefined') return
-        foundLocation.clients = location.clients
+        Vue.set(foundLocation, 'clients', location.clients)
       })
     },
     UPDATE_FILTER_TYPES: (state, types: string[] | []) => {
@@ -41,6 +41,12 @@ export default new Vuex.Store<States>({
     }
   },
   actions: {
+    async UPDATE_LOCATIONS ({ commit }) {
+      commit('UPDATE_LOCATIONS', await getLocations())
+    },
+    async UPDATE_DASHBOARD_DATA ({ commit }) {
+      commit('UPDATE_DASHBOARD_DATA', await getDashboardData())
+    }
   },
   modules: {
   }

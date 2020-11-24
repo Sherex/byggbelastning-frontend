@@ -23,12 +23,13 @@ export default Vue.extend({
   created: async function () {
     const locations = await getLocations()
     this.$store.commit('UPDATE_LOCATIONS', locations)
+    await new Promise((resolve) => setTimeout(() => resolve(), 5000))
     const locationData = await getDashboardData()
     this.$store.commit('UPDATE_DASHBOARD_DATA', locationData)
   },
   computed: {
     locations: function () {
-      const filterTypes = this.$store.state.filterTypes
+      const filterTypes = store.state.filterTypes
       const locations = store.state.locations
       const searchText = store.state.searchText
       const locationsFiltered = locations
