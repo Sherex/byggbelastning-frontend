@@ -1,6 +1,16 @@
 <template>
-  <v-card>
-    <v-card-title>{{location.name}}</v-card-title>
+  <v-card :to="`/location/${location.id}`" >
+    <v-card-title>
+      {{location.name}}
+      <v-spacer/>
+      <v-btn
+        color="primary"
+        icon
+        large
+      >
+        <v-icon>mdi-chevron-right</v-icon>
+      </v-btn>
+    </v-card-title>
     <v-card-subtitle>
       <b>{{location.type.name || location.type.code}}</b><br>
       Bygninger: {{location.buildings.length}} - Etasjer: {{location.buildings.reduce((p, b) => p + b.floors.length, 0)}}
