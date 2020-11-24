@@ -23,29 +23,29 @@ export default new Vuex.Store<States>({
     TOGGLE_SIDE_DRAWER: (state) => {
       state.sideDrawer = !state.sideDrawer
     },
-    UPDATE_LOCATIONS: (state, locations: Location[]) => {
+    SET_LOCATIONS: (state, locations: Location[]) => {
       state.locations = locations
     },
-    UPDATE_DASHBOARD_DATA: (state, data: DashboardData[]) => {
+    SET_DASHBOARD_DATA: (state, data: DashboardData[]) => {
       data.forEach(location => {
         const foundLocation = state.locations.find(loc => loc.id === location.id)
         if (typeof foundLocation === 'undefined') return
         Vue.set(foundLocation, 'clients', location.clients)
       })
     },
-    UPDATE_FILTER_TYPES: (state, types: string[] | []) => {
+    SET_FILTER_TYPES: (state, types: string[] | []) => {
       state.filterTypes = types
     },
-    UPDATE_SEARCH_TEXT: (state, text: string) => {
+    SET_SEARCH_TEXT: (state, text: string) => {
       state.searchText = text
     }
   },
   actions: {
     async UPDATE_LOCATIONS ({ commit }) {
-      commit('UPDATE_LOCATIONS', await getLocations())
+      commit('SET_LOCATIONS', await getLocations())
     },
     async UPDATE_DASHBOARD_DATA ({ commit }) {
-      commit('UPDATE_DASHBOARD_DATA', await getDashboardData())
+      commit('SET_DASHBOARD_DATA', await getDashboardData())
     }
   },
   modules: {

@@ -40,7 +40,7 @@ export default Vue.extend({
   computed: {
     filterTypes: {
       set (types: string[]): void {
-        store.commit('UPDATE_FILTER_TYPES', types)
+        store.commit('SET_FILTER_TYPES', types)
       },
       get (): string[] {
         return store.state.filterTypes
