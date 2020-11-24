@@ -32,7 +32,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Location } from '../lib/get-locations'
 import store from '../store'
 
 export default Vue.extend({
@@ -43,17 +42,11 @@ export default Vue.extend({
         store.commit('SET_FILTER_TYPES', types)
       },
       get (): string[] {
-        return store.state.filterTypes
+        return store.getters.enabledFilterTypes
       }
     },
-    allFilterTypes: function (): Location['type'][] {
-      const filterTypes: Location['type'][] = []
-      store.state.locations.forEach(location => {
-        if (filterTypes.findIndex(existingType => existingType.code === location.type.code) === -1) {
-          filterTypes.push(location.type)
-        }
-      })
-      return filterTypes
+    allFilterTypes: function () {
+      return store.state.filterTypes
     }
   },
   created: function (): void {

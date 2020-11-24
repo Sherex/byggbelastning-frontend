@@ -24,7 +24,7 @@ export default Vue.extend({
   },
   computed: {
     locations: function () {
-      const filterTypes = store.state.filterTypes
+      const filterTypes = store.getters.enabledFilterTypes
       const locations = store.state.locations
       const searchText = store.state.searchText
       const locationsFiltered = locations

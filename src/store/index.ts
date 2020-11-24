@@ -8,7 +8,7 @@ Vue.use(Vuex)
 interface States {
   sideDrawer: boolean
   locations: Location[]
-  filterTypes: string[]
+  filterTypes: (Location['type'] & { enabled: boolean })[]
   searchText: string
 }
 
@@ -18,6 +18,11 @@ export default new Vuex.Store<States>({
     locations: [],
     filterTypes: [],
     searchText: ''
+  },
+  getters: {
+    enabledFilterTypes: (state) => {
+      return state.filterTypes.filter(type => type.enabled).map(type => type.code)
+    }
   },
   mutations: {
     TOGGLE_SIDE_DRAWER: (state) => {
@@ -33,16 +38,28 @@ export default new Vuex.Store<States>({
         Vue.set(foundLocation, 'clients', location.clients)
       })
     },
-    SET_FILTER_TYPES: (state, types: string[] | []) => {
-      state.filterTypes = types
+    SET_FILTER_TYPES: (state, types: string[]) => {
+      state.filterTypes.forEach((type, i) => {
+        Vue.set(state.filterTypes[i], 'enabled', types.includes(type.code))
+      })
     },
     SET_SEARCH_TEXT: (state, text: string) => {
       state.searchText = text
     }
   },
   actions: {
-    async UPDATE_LOCATIONS ({ commit }) {
-      commit('SET_LOCATIONS', await getLocations())
+    async UPDATE_LOCATIONS ({ commit, state }) {
+      const locations = await getLocations()
+      commit('SET_LOCATIONS', locations)
+
+      state.locations.forEach(location => {
+        if (state.filterTypes.findIndex(existingType => existingType.code === location.type.code) === -1) {
+          state.filterTypes.push({
+            ...location.type,
+            enabled: true
+          })
+        }
+      })
     },
     async UPDATE_DASHBOARD_DATA ({ commit }) {
       commit('SET_DASHBOARD_DATA', await getDashboardData())
