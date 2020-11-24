@@ -3,7 +3,7 @@
     <v-card-title>{{location.name}}</v-card-title>
     <v-card-subtitle>
       <b>{{location.type.name || location.type.code}}</b><br>
-      Buildings: {{location.buildings.length}} - Floors: {{location.buildings.reduce((p, b) => p + b.floors.length, 0)}}
+      Bygninger: {{location.buildings.length}} - Etasjer: {{location.buildings.reduce((p, b) => p + b.floors.length, 0)}}
     </v-card-subtitle>
     <v-card-text v-if="location.clients">
       <v-container fluid style="text-align: center;">
@@ -11,19 +11,19 @@
           <v-col cols="4">
             <div>
               <h1>{{location.clients.current}}</h1>
-              <p>Currently</p>
+              <p>Nåværende</p>
             </div>
           </v-col>
           <v-col cols="4">
             <div>
               <h1>{{location.clients.uniqueToday}}</h1>
-              <p>Today</p>
+              <p>I dag</p>
             </div>
           </v-col>
           <v-col cols="4">
             <div>
               <h1>{{location.clients.uniqueYesterday}}</h1>
-              <p>Yesterday</p>
+              <p>I går</p>
             </div>
           </v-col>
         </v-row>
@@ -39,7 +39,7 @@
           stroke-linecap="round"
           fill
         ></v-sparkline>
-        <p>Last 24h</p>
+        <p>Gårsdagen's 24 timer</p>
       </div>
     </v-card-text>
     <v-card-text v-else>

@@ -27,7 +27,7 @@
             <v-icon>mdi-information</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>About</v-list-item-title>
+            <v-list-item-title>Traffikmåling</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
