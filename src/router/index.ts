@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
 import Location from '../views/Location.vue'
-import Traffic from '../views/Traffic.vue'
+import About from '../views/About.vue'
 
 Vue.use(VueRouter)
 
@@ -18,9 +18,9 @@ const routes: Array<RouteConfig> = [
     component: Location
   },
   {
-    path: '/traffic',
-    name: 'Traffic',
-    component: Traffic
+    path: '/about',
+    name: 'About',
+    component: About
   }
 ]
 

@@ -19,15 +19,15 @@
             <v-icon>mdi-home</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Dashboard</v-list-item-title>
+            <v-list-item-title>Oversikt</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item to="/traffic/:location">
+        <v-list-item to="/about">
           <v-list-item-action>
             <v-icon>mdi-information</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Traffikmåling</v-list-item-title>
+            <v-list-item-title>Om</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>

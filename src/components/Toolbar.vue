@@ -20,7 +20,7 @@
       solo-inverted
       flat
       hide-details
-      label="Search"
+      label="Søk"
       prepend-inner-icon="mdi-magnify"
     ></v-text-field>
 
