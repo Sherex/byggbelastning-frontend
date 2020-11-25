@@ -50,7 +50,7 @@ export default Vue.extend({
   computed: {
     searchFieldContent: {
       set (searchText: string): void {
-        store.commit('UPDATE_SEARCH_TEXT', searchText)
+        store.commit('SET_SEARCH_TEXT', searchText)
       },
       get (): string {
         return store.state.searchText
