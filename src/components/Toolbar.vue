@@ -28,6 +28,8 @@
 
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
+    <!-- TODO: Add account dropdown -->
+    <h2>{{login ? login.account.name || 'Innlogget' : 'Utlogget'}}</h2>
   </v-app-bar>
 </template>
 
@@ -55,7 +57,8 @@ export default Vue.extend({
       get (): string {
         return this.$accessor.searchText
       }
-    }
+    },
+    login: function () { return this.$accessor.msal.login }
   }
 })
 </script>

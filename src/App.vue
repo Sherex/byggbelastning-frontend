@@ -60,6 +60,7 @@ export default Vue.extend({
     'sideDrawer'
   ]),
   created: async function () {
+    if (!this.$accessor.msal.login) this.$router.push('/login')
     await this.$accessor.updateLocations()
     await this.$accessor.updateDashboardData()
   }
