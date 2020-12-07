@@ -16,6 +16,7 @@
     "graphql": "^15.4.0",
     "graphql-request": "^3.3.0",
     "roboto-fontface": "*",
+    "typed-vuex": "^0.1.22",
     "vue": "^2.6.12",
     "vue-router": "^3.4.9",
     "vuetify": "^2.3.19",

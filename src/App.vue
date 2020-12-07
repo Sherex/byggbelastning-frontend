@@ -45,7 +45,6 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapState } from 'vuex'
-import store from './store'
 import Toolbar from './components/Toolbar.vue'
 import Footer from './components/Footer.vue'
 
@@ -61,8 +60,8 @@ export default Vue.extend({
     'sideDrawer'
   ]),
   created: async function () {
-    await store.dispatch('UPDATE_LOCATIONS')
-    await store.dispatch('UPDATE_DASHBOARD_DATA')
+    await this.$accessor.updateLocations()
+    await this.$accessor.updateDashboardData()
   }
 })
 </script>

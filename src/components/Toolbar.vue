@@ -33,9 +33,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapMutations } from 'vuex'
 import TypeFilterButton from './TypeFilterButton.vue'
-import store from '../store'
 import { config } from '../config'
 
 export default Vue.extend({
@@ -47,17 +45,15 @@ export default Vue.extend({
     appName: config.metaData.appName
   }),
   methods: {
-    ...mapMutations({
-      toggleSideDrawer: 'TOGGLE_SIDE_DRAWER'
-    })
+    toggleSideDrawer: function () { this.$accessor.toggleSideDrawer() }
   },
   computed: {
     searchFieldContent: {
       set (searchText: string): void {
-        store.commit('SET_SEARCH_TEXT', searchText)
+        this.$accessor.setSearchText(searchText)
       },
       get (): string {
-        return store.state.searchText
+        return this.$accessor.searchText
       }
     }
   }

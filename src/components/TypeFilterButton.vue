@@ -32,21 +32,20 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import store from '../store'
 
 export default Vue.extend({
   name: 'TypeFilterButton',
   computed: {
     filterTypes: {
       set (types: string[]): void {
-        store.commit('SET_FILTER_TYPES', types)
+        this.$accessor.setFilterTypes(types)
       },
       get (): string[] {
-        return store.getters.enabledFilterTypes
+        return this.$accessor.enabledFilterTypes
       }
     },
     allFilterTypes: function () {
-      return store.state.filterTypes
+      return this.$accessor.filterTypes
     }
   },
   created: function (): void {
