@@ -3,6 +3,7 @@ import Vuetify from 'vuetify'
 
 Vue.use(Vuetify)
 
+// TODO: Configureable colors
 export default new Vuetify({
   icons: {
     iconfont: 'mdi'

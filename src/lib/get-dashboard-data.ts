@@ -1,4 +1,5 @@
 import { request, gql } from 'graphql-request'
+import { config } from '../config'
 
 interface LocationsResponse {
   locations: Array<{
@@ -23,8 +24,7 @@ export interface DashboardData {
 }
 
 export async function getDashboardData (): Promise<DashboardData[]> {
-  // TODO: Get Url from config
-  const response = await request<LocationsResponse>('http://localhost:4000/graphql',
+  const response = await request<LocationsResponse>(config.apiUrl,
     // TODO: Remove id limit
     gql`
       query getLocations {

@@ -11,7 +11,7 @@
     </router-link>
 
     <router-link to="/">
-      <v-toolbar-title>Byggbelastning</v-toolbar-title>
+      <v-toolbar-title>{{appName}}</v-toolbar-title>
     </router-link>
 
     <v-spacer></v-spacer>
@@ -36,12 +36,16 @@ import Vue from 'vue'
 import { mapMutations } from 'vuex'
 import TypeFilterButton from './TypeFilterButton.vue'
 import store from '../store'
+import { config } from '../config'
 
 export default Vue.extend({
   name: 'Toolbar',
   components: {
     TypeFilterButton
   },
+  data: () => ({
+    appName: config.metaData.appName
+  }),
   methods: {
     ...mapMutations({
       toggleSideDrawer: 'TOGGLE_SIDE_DRAWER'

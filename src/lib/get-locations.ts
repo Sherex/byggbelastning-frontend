@@ -1,4 +1,5 @@
 import { request, gql } from 'graphql-request'
+import { config } from '../config'
 
 interface LocationsResponse {
   locations: Array<{
@@ -41,8 +42,7 @@ export interface Location {
 }
 
 export async function getLocations (): Promise<Location[]> {
-  // TODO: Get Url from config
-  const response = await request<LocationsResponse>('http://localhost:4000/graphql',
+  const response = await request<LocationsResponse>(config.apiUrl,
     gql`
       query getLocations {
         locations {

@@ -11,11 +11,12 @@
 
 <script lang='ts'>
 import Vue from 'vue'
+import { config } from '../config'
 
 export default Vue.extend({
   name: 'Footer',
   data: () => ({
-    productOwner: 'Vestfold og Telemark Fylkeskommune'
+    productOwner: config.metaData.productOwner
   })
 })
 </script>
