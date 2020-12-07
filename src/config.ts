@@ -4,7 +4,11 @@ export const config = {
     productOwner: env('VUE_APP_PRODUCT_OWNER', 'Vestfold og Telemark Fylkeskommune'),
     repositoryUrl: env('VUE_APP_REPOSITORY_URL', 'https://github.com/vtfk/byggbelastning-frontend')
   },
-  apiUrl: env('API_URL', 'http://localhost:4000/graphql')
+  apiUrl: env('API_URL', 'http://localhost:4000/graphql'),
+  msal: {
+    clientId: env('VUE_APP_MSAL_CLIENT_ID'),
+    authority: env('VUE_APP_MSAL_AUTHORITY', 'https://login.microsoftonline.com/common/')
+  }
 }
 
 function env (env: string, defaultValue?: string): string {

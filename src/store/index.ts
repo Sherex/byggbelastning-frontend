@@ -6,8 +6,23 @@ import {
   mutationTree,
   actionTree
 } from 'typed-vuex'
+import { config } from '../config'
+import { vuexCreateMsalModule, CreateVuexModuleOptions } from './modules/msal'
 import { getLocations, Location } from '../lib/get-locations'
 import { getDashboardData, DashboardData } from '../lib/get-dashboard-data'
+
+Vue.use(Vuex)
+
+const msalOptions: CreateVuexModuleOptions = {
+  namespaced: true,
+  msalConfig: {
+    auth: {
+      clientId: config.msal.clientId,
+      authority: config.msal.authority,
+      redirectUri: '/login'
+    }
+  }
+}
 
 interface States {
   sideDrawer: boolean
@@ -82,7 +97,9 @@ export const storePattern = {
   getters,
   mutations,
   actions,
-  modules: {}
+  modules: {
+    msal: vuexCreateMsalModule(msalOptions)
+  }
 }
 
 const store = new Vuex.Store(storePattern)

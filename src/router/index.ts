@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
+import Login from '../views/Login.vue'
 import Location from '../views/Location.vue'
 import About from '../views/About.vue'
 
@@ -11,6 +12,11 @@ const routes: Array<RouteConfig> = [
     path: '/',
     name: 'Dashboard',
     component: Dashboard
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   },
   {
     path: '/location/:id',
